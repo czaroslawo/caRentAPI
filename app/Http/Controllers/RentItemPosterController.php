@@ -21,13 +21,11 @@ class RentItemPosterController extends Controller
             'imageUrl.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $images = [];
+        $imagePath = null;
         if ($request->hasFile('imageUrl')) {
-            foreach ($request->file('imageUrl') as $file) {
-                $path = $file->store('rent_images', 'public');
-                $images[] = $path;
-            }
+            $imagePath = $request->file('imageUrl')->store('rent_images', 'public');
         }
+
 
         $item = RentItemPoster::create([
             'title' => $validated['title'],
@@ -38,10 +36,34 @@ class RentItemPosterController extends Controller
             'year' => $validated['year'],
             'price' => $validated['price'],
             'rating' => $validated['rating'],
+            'image_path' => $imagePath,
         ]);
 
         // Optionally: store image paths in another table or JSON column
 
         return response()->json(['message' => 'Item created', 'item' => $item]);
+    }
+
+    public function index()
+    {
+
+        $items = RentItemPoster::all();
+
+        $result = $items->map(function($item) {
+            return [
+                'id' => $item->id,
+                'imageUrl' => $item->image_path ? asset('storage/' . $item->image_path) : null, // pełny URL do zdjęcia
+                'title' => $item->title,
+                'location' => $item->location,
+                'transmission' => $item->transmission,
+                'seats' => $item->seats,
+                'power' => $item->power,
+                'year' => $item->year,
+                'price' => $item->price,
+                'rating' => $item->rating,
+            ];
+        });
+
+        return response()->json($result);
     }
 }

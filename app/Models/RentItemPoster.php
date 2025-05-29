@@ -8,6 +8,6 @@ class RentItemPoster extends Model
 {
     protected $fillable = [
         'title', 'location', 'transmission', 'seats',
-        'power', 'year', 'price', 'rating'
+        'power', 'year', 'price', 'rating', 'image_path'
     ];
 }
