@@ -66,4 +66,22 @@ class RentItemPosterController extends Controller
 
         return response()->json($result);
     }
+
+    public function destroy($id)
+    {
+        $item = RentItemPoster::find($id);
+
+        if (!$item) {
+            return response()->json(['message' => 'Item not found'], 404);
+        }
+
+        // Usunięcie obrazka z dysku, jeśli istnieje
+        if ($item->image_path && \Storage::disk('public')->exists($item->image_path)) {
+            \Storage::disk('public')->delete($item->image_path);
+        }
+
+        $item->delete();
+
+        return response()->json(['message' => 'Item deleted successfully']);
+    }
 }

@@ -13,3 +13,4 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/add-item-poster', [RentItemPosterController::class, 'store']);
 Route::get('/item-posters', [RentItemPosterController::class, 'index']);
+Route::delete('/item-posters/{id}', [RentItemPosterController::class, 'destroy']);
