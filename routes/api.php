@@ -14,3 +14,7 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])-
 Route::post('/add-item-poster', [RentItemPosterController::class, 'store']);
 Route::get('/item-posters', [RentItemPosterController::class, 'index']);
 Route::delete('/item-posters/{id}', [RentItemPosterController::class, 'destroy']);
+Route::post('/add-item', [\App\Http\Controllers\RentItemController::class, 'store']);
+Route::get('/items', [\App\Http\Controllers\RentItemController::class, 'index']);
+Route::delete('/items/{id}', [\App\Http\Controllers\RentItemController::class, 'destroy']);
+Route::post('/add-item-with-poster', [\App\Http\Controllers\RentItemController::class, 'storeWithPoster']);

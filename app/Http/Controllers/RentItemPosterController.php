@@ -19,6 +19,7 @@ class RentItemPosterController extends Controller
             'price' => 'required|numeric',
             'rating' => 'required|numeric',
             'imageUrl.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'rent_item_id' => 'required|exists:rent_items,id'
         ]);
 
         $imagePath = null;
@@ -37,6 +38,7 @@ class RentItemPosterController extends Controller
             'price' => $validated['price'],
             'rating' => $validated['rating'],
             'image_path' => $imagePath,
+            'rent_item_id' => $validated['rent_item_id']
         ]);
 
         // Optionally: store image paths in another table or JSON column
