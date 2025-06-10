@@ -180,7 +180,7 @@ public function store(Request $request)
             'year' => $item->year,
             'price' => $item->price,
             'description' => $item->description,
-            'images' => $item->images->map(fn($img) => asset('storage/' . $img->image_path)),
+            'imageUrl' => $item->images->map(fn($img) => asset('storage/' . $img->image_path)),
         ]);
     }
 

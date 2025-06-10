@@ -63,6 +63,7 @@ class RentItemPosterController extends Controller
                 'year' => $item->year,
                 'price' => $item->price,
                 'rating' => $item->rating,
+                'rent_item_id' => $item->rent_item_id
             ];
         });
 
