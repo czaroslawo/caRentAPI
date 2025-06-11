@@ -16,6 +16,7 @@ class RentItemController extends Controller
         // 1) Walidacja wszystkich kluczy zgodnie z tym, co wysyła Angular:
         $validated = $request->validate([
             // --- pola RentItem ---
+            'userId'       => 'required|integer',
             'title'        => 'required|string|max:255',
             'address'      => 'required|string|max:255',
             'transmission' => 'required|string|max:255',
@@ -43,6 +44,7 @@ class RentItemController extends Controller
         try {
             // 3) Tworzymy najpierw “główny” RentItem
             $item = RentItem::create([
+                'userId'       => $validated['userId'],
                 'title'        => $validated['title'],
                 'address'      => $validated['address'],
                 'transmission' => $validated['transmission'],
@@ -147,6 +149,7 @@ public function store(Request $request)
         $result = $items->map(function ($item) {
             return [
                 'id' => $item->id,
+                'userId' => $item->userId,
                 'title' => $item->title,
                 'address' => $item->address,
                 'transmission' => $item->transmission,
@@ -172,6 +175,7 @@ public function store(Request $request)
 
         return response()->json([
             'id' => $item->id,
+            'userId' => $item->userId,
             'title' => $item->title,
             'address' => $item->address,
             'transmission' => $item->transmission,

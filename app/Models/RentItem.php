@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RentItem extends Model
 {
     protected $fillable = [
-        'title', 'address', 'transmission', 'seats',
+        'userId', 'title', 'address', 'transmission', 'seats',
         'power', 'year', 'price', 'description'
     ];
 
@@ -19,6 +19,11 @@ class RentItem extends Model
     public function poster()
     {
         return $this->hasOne(RentItemPoster::class, 'rent_item_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

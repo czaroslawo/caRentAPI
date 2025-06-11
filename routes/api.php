@@ -19,3 +19,4 @@ Route::get('/items', [\App\Http\Controllers\RentItemController::class, 'index'])
 Route::delete('/items/{id}', [\App\Http\Controllers\RentItemController::class, 'destroy']);
 Route::post('/add-item-with-poster', [\App\Http\Controllers\RentItemController::class, 'storeWithPoster']);
 Route::get('get-item/{id}', [\App\Http\Controllers\RentItemController::class, 'show']);
+Route::get('/get-user/{id}', [\App\Http\Controllers\AuthController::class, 'getUser']);

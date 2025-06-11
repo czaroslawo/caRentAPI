@@ -14,6 +14,7 @@ class AuthController extends Controller
         $fields = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
+            'phone_number' => 'required',
             'password' => 'required'
         ]);
 
@@ -54,5 +55,19 @@ class AuthController extends Controller
         return[
             'message' => 'You are logged out'
         ];
+    }
+
+    public function getUser($id): \Illuminate\Http\JsonResponse
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        return response()->json([
+            'id' => $user->id,
+            'name' => $user->name,
+            'phone_number' => $user->phone_number
+        ]);
     }
 }
