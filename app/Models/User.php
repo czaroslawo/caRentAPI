@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\RentItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\RentItem;
+use App\Models\Reservation;
 
 class User extends Authenticatable
 {
@@ -52,5 +53,9 @@ class User extends Authenticatable
     public function rentItems(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(RentItem::class);
+    }
+
+    public function reservations():\Illuminate\Database\Eloquent\Relations\HasMany {
+        return $this->hasMany(Reservation::class);
     }
 }
